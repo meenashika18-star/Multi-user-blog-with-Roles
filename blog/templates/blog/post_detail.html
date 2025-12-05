@@ -1,0 +1,50 @@
+{% extends 'blog/base.html' %}
+{% block title %}{{ object.title }}{% endblock %}
+{% block content %}
+  <article>
+    <div class="d-flex justify-content-between align-items-start mb-2">
+      <div>
+        <h1 class="mb-0">{{ object.title }}</h1>
+        <p class="text-muted">By {{ object.author }} • {{ object.created_at }}</p>
+      </div>
+      <div>
+        {% if user.is_authenticated and user == object.author %}
+          <a href="{% url 'post_edit' slug=object.slug %}" class="btn btn-sm btn-outline-secondary me-2">Edit</a>
+          <a href="{% url 'post_delete' slug=object.slug %}" class="btn btn-sm btn-outline-danger">Delete</a>
+        {% endif %}
+      </div>
+    </div>
+    <div>{{ object.body|linebreaks }}</div>
+    <p>
+      {% for tag in object.tags.all %}
+        <a href="?tag={{ tag.name }}" class="badge bg-secondary text-decoration-none">{{ tag.name }}</a>
+      {% endfor %}
+    </p>
+
+    <form method="post" action="{% url 'post_like' slug=object.slug %}">
+      {% csrf_token %}
+      <button class="btn btn-sm btn-outline-primary">{% if liked %}Unlike{% else %}Like{% endif %} ({{ object.likes.count }})</button>
+    </form>
+
+    <hr>
+    <h5>Comments</h5>
+    {% for comment in object.comments.all %}
+      {% if comment.approved %}
+        <div class="mb-2"><strong>{{ comment.user }}</strong> — {{ comment.body }}</div>
+      {% endif %}
+    {% empty %}
+      <p>No comments yet.</p>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+      <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button class="btn btn-primary">Post comment</button>
+      </form>
+    {% else %}
+      <p><a href="/admin/login/">Login</a> to comment.</p>
+    {% endif %}
+  </article>
+
+{% endblock %}

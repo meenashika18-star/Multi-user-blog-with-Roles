@@ -1,0 +1,80 @@
+/* Blog custom styles */
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --muted:#6c757d;
+  --accent:#4f46e5; /* indigo-ish */
+  --accent-2:#06b6d4; /* teal */
+}
+
+html,body{
+  height:100%;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
+  color: #111827;
+}
+
+.main-container{
+  max-width:1000px;
+  margin-top: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.site-brand{
+  font-weight:700;
+  color:var(--accent);
+  letter-spacing: -0.5px;
+}
+
+.navbar-custom .nav-link{
+  color:#334155;
+}
+
+.user-badge{ font-weight:600; }
+
+.card{
+  border: none;
+  border-radius: 12px;
+}
+
+.card .card-body{
+  padding:1.25rem;
+}
+
+.shadow-sm{ box-shadow: 0 4px 18px rgba(16,24,40,0.06) !important; }
+
+/* Post cards */
+.post-card{ transition: transform .12s ease, box-shadow .12s ease; }
+.post-card:hover{ transform: translateY(-6px); box-shadow: 0 10px 30px rgba(2,6,23,0.06); }
+
+.post-meta{ color: var(--muted); font-size: 0.9rem; }
+
+.badge-tag{
+  background: linear-gradient(90deg, rgba(79,70,229,0.12), rgba(6,182,212,0.08));
+  color: #0f172a;
+  border-radius: 999px;
+  padding: .25rem .6rem;
+  font-weight:600;
+  margin-right: .4rem;
+}
+
+.btn-primary{
+  background: linear-gradient(90deg, var(--accent), #7c3aed);
+  border:none;
+  box-shadow: 0 6px 18px rgba(79,70,229,0.12);
+}
+
+.form-control, .form-select{
+  border-radius:8px;
+  padding:.5rem .75rem;
+}
+
+/* Post detail styling */
+.article-body{ line-height:1.8; color:#0f172a; }
+
+/* Footer spacing */
+.footer{ padding:2.5rem 0; color:var(--muted); }
+
+@media (max-width:767px){
+  .main-container{ padding: 0 1rem; }
+}

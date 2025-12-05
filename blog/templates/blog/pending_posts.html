@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% block title %}Pending Posts{% endblock %}
+{% block content %}
+  <h1>Pending Posts</h1>
+  <ul>
+    {% for post in object_list %}
+      <li>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> — {{ post.author }}
+      </li>
+    {% empty %}
+      <li>No pending posts</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
